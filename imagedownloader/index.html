@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback Function</title>
+    <style>
+        body {
+            background-color: rgba(10, 143, 143, 0.838);
+        }
+
+        .btn-grad {
+            background-image: linear-gradient(to right, #348F50 0%, #56B4D3 51%, #348F50 100%)
+        }
+
+        .btn-grad {
+            margin: 10px;
+            padding: 15px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .btn-grad:hover {
+            background-position: right center;
+            /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <button class="btn-grad" onclick="download()">Download Image</button>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+        integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        function download() {
+            axios({
+                url: 'https://source.unsplash.com/random/500*500',
+                method: 'GET',
+                responseType: 'blob'
+            })
+                .then(response => {
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'file.jpg')
+                    link.click()
+
+                });
+
+        };
+    </script>
+
+
+</body>
+
+</html>
